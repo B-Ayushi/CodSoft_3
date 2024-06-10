@@ -1,0 +1,113 @@
+package codsoft;
+import java.util.*;
+class ATM {
+	Scanner sc=new Scanner(System.in);
+	String name;
+	int no;
+	int bal;
+	int with;
+	int dep;
+	int w;
+	int d;
+	void accept() {
+		System.out.println("Enter the name of Account Holder");
+		name=sc.next();
+		System.out.println("Enter the account no");
+		no=sc.nextInt();
+		System.out.println("Enter the amount in account");
+		bal=sc.nextInt();
+	}
+	void withdraw(ATM[] arr, int no) {
+	    for (ATM acc : arr) {
+	        if (acc.no == no) {
+	            System.out.println("Enter the amount to withdraw");
+	            with = sc.nextInt();
+	            if (with <= acc.bal) {
+	                acc.bal -= with; // Subtract the withdrawn amount from the balance of the account
+	                System.out.println("AMOUNT IN BANK:-" + "  " + acc.bal);
+	            } else {
+	                System.out.println("Insufficient balance");
+	            }
+	            return;
+	        }
+	    }
+	    System.out.println("Account not found"); // If account number is not found
+	}
+
+	void deposit(ATM[] arr, int acno) {
+	
+		   
+		    for (ATM acc : arr) {
+		        if (acc.no == acno) {
+		            System.out.println("Enter the amount to deposit");
+		            dep = sc.nextInt();
+		            acc.bal += dep; // Add the deposited amount to the balance of the account
+		            System.out.println("AMOUNT IN BANK:-" + " " + acc.bal);
+		            return; // Exit the method once deposit is done
+		        }
+		    }
+		    System.out.println("Account not found"); // If account number is not found
+		
+
+	}
+	void checkbal(String s, ATM arr[]) {
+	    boolean found = false; // Flag to track if the account is found
+	    for (ATM acc : arr) {
+	        if (s.equals(acc.name)) {
+	            System.out.println("Name of Account Holder: " + acc.name + "\nAccount Number: " + acc.no + "\nBalance: " + acc.bal);
+	            found = true;
+	            break; // Exit the loop once the account is found
+	        }
+	    }
+	    if (!found) {
+	        System.out.println("Account not found");
+	    }
+	}
+}
+
+public class  ght {
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the no of people to check balance of");
+		int n=sc.nextInt();
+		ATM arr[]=new ATM[n];
+		System.out.println("***********WELCOME TO ACCOUNTS SECTION*************");
+		System.out.println("Enter Your Details");
+		for(int i=0;i<arr.length;i++) {
+			arr[i]=new ATM();
+		    arr[i].accept();
+		}
+		while(true) {
+		System.out.println("SERVICES PROVIDED: \n1)WITHDRAW \n2)DEPOSIT \n3)CHECK BALANCE");
+		int choice=sc.nextInt();
+		switch(choice) {
+		case 1:
+			System.out.println("Enter the account to withdraw money");
+			int no=sc.nextInt();
+			
+		for(int i=0;i<arr.length;i++) {
+			arr[i].withdraw(arr, no);
+		}
+		break;
+		case 2:
+			 System.out.println("Enter the account to deposit money");
+			    int acno=sc.nextInt();
+		for(int i=0;i<arr.length;i++) {
+			arr[i].deposit(arr, acno);
+		}
+		break;
+		case 3:
+			System.out.println("Enter the name of Account Holder to search");
+			String s=sc.next();
+			
+		for(int i=0;i<arr.length;i++) {
+			arr[i].checkbal(s,arr);
+		}
+		break;
+		
+	}
+		return ;
+}
+	}
+}
+
